@@ -9,8 +9,6 @@ public:
         {
             if(in[i][0]<=end)
             {
-                if(in[i][0]<start)
-                start=in[i][0];
                 if(in[i][1]>end)
                   end=in[i][1];
                     
