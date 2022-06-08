@@ -10,8 +10,7 @@ public:
             if(in[i][0]<=end)
             {
                 if(in[i][1]>end)
-                  end=in[i][1];
-                    
+                  end=in[i][1];    
             }
             else{
                 ans.push_back({start,end});
