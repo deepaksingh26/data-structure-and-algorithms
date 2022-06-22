@@ -1,6 +1,5 @@
-#define ll long long int
 class Solution {
- int merge(int low,int mid,int high,vector<int> &nums){
+int merge(int low,int mid,int high,vector<int> &nums){
         
         int j = mid+1;
         int inv = 0;
