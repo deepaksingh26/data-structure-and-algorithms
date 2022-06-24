@@ -1,141 +1,94 @@
-// #define ll long long int
 // class Solution {
 // public:
-    
-//     int binarySearch(vector<int>&nums,int low,int high,int tar){
-//         while(low<=high){
-//             ll mid = low + (high-low)/2;
-//             if(nums[mid]>tar) high = mid-1;
-//             else if(nums[mid]<tar) low = mid+1;
-//             else {
-//                 return 1;
-//             }
-//         }
-//         return 0;
-                    
-//     }
 //     vector<vector<int>> fourSum(vector<int>& nums, int target) {
-//         int n=nums.size(); 
-//        set<vector<int>>temp;
+//         vector<vector<int>>ans;
+//         int n=nums.size();
+//         if(n==0) 
+//             return ans;
 //         sort(nums.begin(),nums.end());
-//         for(int i =0;i<n;i++)
+//         for(int i=0;i<n;i++)
 //         {
+            
 //             for(int j=i+1;j<n;j++)
 //             {
-//                 for(int k=j+1;k<n;k++)
+//                 while(j+1<n&&nums[j]==nums[j+1])  continue;
+//                 int t=target-nums[i]-nums[j];
+//                 int front=j+1;
+//                 int back=n-1;
+//                 while(front<back)
 //                 {
-//                     ll t=(ll)target-(ll)nums[i]-(ll)nums[j]-(ll)nums[k];
-//                     if(binarySearch(nums,k+1,n-1,t))
+//                     if(t>nums[front]+nums[back])
+//                     back--;
+//                     else if(t<nums[front]+nums[back])
+//                     front++;
+//                     else
 //                     {
-                       
-//                         temp.insert({nums[i],nums[j],nums[k],t});
+//                         vector<int>temp(4,0);
+//                         temp[0]=nums[i];
+//                         temp[1]=nums[j];
+//                         temp[2]=nums[front];
+//                         temp[3]=nums[back];
+//                         ans.push_back(temp);
+//                     while(front&&nums[front]==temp[2]) front++;
+//                     while(front<back&&nums[back]==temp[3]) back--;
 //                     }
 //                 }
+//              while(j+1<n&&nums[j]==nums[j+1]) 
+//                     j++;   
 //             }
-//         }
-//         vector<vector<int>>ans;
-//         for(auto it:temp)
-//         {
-//             ans.push_back(it);
+//               while(i+1<n&&nums[i]==nums[i+1]) 
+//                     i++;
 //         }
 //         return ans;
 //     }
-    
 // };
-// #define ll long long int
-// class Solution {
-// public:
-    
-//     int binarySearch(vector<int>&nums,int low,int high,int tar){
-//         while(low<=high){
-//             ll mid = low + (high-low)/2;
-//             if(nums[mid]>tar) high = mid-1;
-//             else if(nums[mid]<tar) low = mid+1;
-//             else {
-//                 return 1;
-//             }
-//         }
-//         return 0;
-                    
-//     }
-//     vector<vector<int>> fourSum(vector<int>& nums, int target) {
-//         int n=nums.size(); 
-//        set<vector<int>>temp;
-//         sort(nums.begin(),nums.end());
-//         for(int i =0;i<n;i++)
-//         {
-//             for(int j=i+1;j<n;j++)
-//             {
-//                 for(int k=j+1;k<n;k++)
-//                 {
-//                     ll t=(ll)target-(ll)nums[i]-(ll)nums[j]-(ll)nums[k];
-//                     if(binarySearch(nums,k+1,n-1,t))
-//                     {
-//                         vector<int> ds;
-//                         ds.push_back(nums[i]);
-//                         ds.push_back(nums[j]);
-//                         ds.push_back(nums[k]);
-//                         ds.push_back(t);
-//                         temp.insert(ds);
-//                     }
-//                 }
-//             }
-//         }
-//         vector<vector<int>>ans;
-//         for(auto it:temp)
-//         {
-//             ans.push_back(it);
-//         }
-//         return ans;
-//     }
-    
-// };
-#define ll long long int
-
 class Solution {
-    int bs(int low,int high,vector<int>&nums,ll tar){
-      
-        
-        while(low<=high){
-            ll mid = low + (high-low)/2;
-            if(nums[mid]>tar) high = mid-1;
-            else if(nums[mid]<tar) low = mid+1;
-            else {
-                return 1;
-            }
-        }
-        return 0;
-                    
-    }
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        set<vector<int>> ans;
-        int n = nums.size();
-        sort(nums.begin(),nums.end());
-        for(int i=0;i<n;i++){
-            for(int j=i+1;j<n;j++){
-                for(int k=j+1;k<=n-1;k++){
+             sort(nums.begin(),nums.end());
+    
+    vector<vector<int>>ans;
+    
+    if(nums.size()<4) return ans;
+    
+    int n=nums.size();
+    
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            long long int rem=target-1LL*nums[i]-1LL*nums[j];
+            
+             int low=j+1;
+             int high=n-1;
+            
+            while(low<high){
+              long long int val=nums[low]+nums[high];
+                if(val<rem) low++;
+                else if(val>rem) high--;
+                else {
+                    vector<int>temp;
+                    temp.push_back(nums[i]);
+                    temp.push_back(nums[j]);
+                    temp.push_back(nums[low]);
+                    temp.push_back(nums[high]);
                     
+                    ans.push_back(temp);
                     
-                     ll tar = (ll)target - (ll)nums[i] - (ll)nums[j] - (ll)nums[k];
-                    if(bs(k+1,n-1,nums,tar)){
-                        vector<int> ds;
-                        ds.push_back(nums[i]);
-                        ds.push_back(nums[j]);
-                        ds.push_back(nums[k]);
-                        ds.push_back(tar);
-                        ans.insert(ds);
-                    }
-                    
+                    while(low<high && nums[low]==temp[2])low++;
+                    while(low<high && nums[high]==temp[3]) high--;
                     
                 }
             }
+            
+            while(j+1<n && nums[j]==nums[j+1]) j++;
+            
         }
         
-        vector<vector<int>> finalAns;
-        
-        for(auto &it : ans ) finalAns.push_back(it);
-        return finalAns;
+        while(i+1<n && nums[i]==nums[i+1])i++;
         
     }
+    
+    return ans;
+    
+}
+        
 };
