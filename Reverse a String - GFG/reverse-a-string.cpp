@@ -30,11 +30,7 @@ int main() {
 //User function Template for C++
 
 string reverseWord(string str){
-    
-int i=0,n=str.length()-1;
-while(i<=n)
-{
-    swap(str[i++],str[n--]);
-}
-return str;
+    if(str.length()==0)
+    return "";
+    return reverseWord(str.substr(1))+str[0];
 }
