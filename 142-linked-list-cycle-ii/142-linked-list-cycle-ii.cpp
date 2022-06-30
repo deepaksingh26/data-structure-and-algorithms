@@ -9,18 +9,24 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head)
-    { 
-        if(!head||head->next==head)
-            return head;
-      unordered_set<ListNode *>st;
-      ListNode *front=head;
-      while(front)
-      {
-          if(st.find(front)!=st.end())
-              return front;
-          st.insert(front);
-          front=front->next;
-      }
-      return nullptr;
+    {if (head == NULL || head->next == NULL)
+            return NULL;
+    
+        ListNode *slow  = head;
+        ListNode *fast  = head;
+        ListNode *entry = head;
+
+        while (fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast) {                      // there is a cycle
+                while(slow != entry) {               // found the entry location
+                    slow  = slow->next;
+                    entry = entry->next;
+                }
+                return entry;
+            }
+        }
+        return NULL;      
     }
 };
