@@ -20,8 +20,8 @@ public:
             slow = slow->next;
             fast = fast->next->next;
             if (slow == fast) {                      // there is a cycle
-                while(slow != entry) {               // found the entry location
-                    slow  = slow->next;
+                while(fast != entry) {               // found the entry location
+                    fast  = fast->next;
                     entry = entry->next;
                 }
                 return entry;
