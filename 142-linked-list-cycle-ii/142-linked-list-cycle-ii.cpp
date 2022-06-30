@@ -24,7 +24,7 @@ public:
                     fast  = fast->next;
                     entry = entry->next;
                 }
-                return entry;
+                return fast;
             }
         }
         return NULL;      
