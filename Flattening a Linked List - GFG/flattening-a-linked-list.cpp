@@ -135,14 +135,6 @@ struct Node{
 //     return res->bottom;
 //     }
 // }
-// Node *flatten(Node *head)
-// {
-//   if(!head||!head->next)
-//   return head;
-  
-//   head->next=flatten(head->next);
-//   return merge(head,head->next);
-// }
 Node* mergeTwoLists(Node* a, Node* b) {
     
     Node *temp = new Node(0);
@@ -167,19 +159,12 @@ Node* mergeTwoLists(Node* a, Node* b) {
     return res -> bottom; 
     
 }
-Node *flatten(Node *root)
+Node *flatten(Node *head)
 {
-   
-        if (root == NULL || root->next == NULL) 
-            return root; 
+  if(!head||!head->next)
+  return head;
   
-        // recur for list on right 
-        root->next = flatten(root->next); 
-  
-        // now merge 
-        root = mergeTwoLists(root, root->next); 
-  
-        // return the root 
-        // it will be in turn merged with its left 
-        return root; 
+  head->next=flatten(head->next);
+  return mergeTwoLists(head,head->next);
 }
+
