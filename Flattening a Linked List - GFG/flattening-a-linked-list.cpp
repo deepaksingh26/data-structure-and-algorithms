@@ -110,32 +110,7 @@ struct Node{
 
 /*  Function which returns the  root of 
     the flattened linked list. */
-// Node* merge(Node* a, Node* b )
-// {
-//     Node* temp=new Node(0);
-//     Node* res=temp;
-//     while(a||b)
-//     {
-//     if(a->data<b->data)
-//     {
-//         temp->bottom=a;
-//         temp=temp->bottom;
-//         a=a->bottom;
-//     }
-//     else
-//     {
-//       temp->bottom=b;
-//       temp=temp->bottom;
-//       b=b->bottom;
-//     }
-//     if(a)
-//     temp->bottom=a;
-//     else
-//     temp->bottom=b;
-//     return res->bottom;
-//     }
-// }
-Node* mergeTwoLists(Node* a, Node* b) {
+Node* merge(Node* a, Node* b) {
     
     Node *temp = new Node(0);
     Node *res = temp; 
@@ -165,6 +140,6 @@ Node *flatten(Node *head)
   return head;
   
   head->next=flatten(head->next);
-  return mergeTwoLists(head,head->next);
+  return merge(head,head->next);
 }
 
