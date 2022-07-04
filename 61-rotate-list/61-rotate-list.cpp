@@ -9,34 +9,49 @@
  * };
  */
 class Solution {
-public:
-    ListNode* rotateRight(ListNode* head, int k) 
-    {
-        ListNode* r,*p=head;
-    if(!head||!head->next)
-        return head;
-        int count=0;
-        ListNode* front=head;
-        while(front)
+      ListNode* reverseList(ListNode* head) {
+        if(!head||!head->next)
+            return head;
+        ListNode* curr=head;
+        ListNode* nxt=head->next;
+        ListNode* r=nullptr;
+        while(curr)
         {
-            count++;
-            front=front->next;
+            curr->next=r;
+            r=curr;
+            curr=nxt;
+          if(nxt)  nxt=nxt->next;   
+        }
+        return r;
+    }
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(!head||!head->next||k==0)
+            return head;
+        ListNode* start= reverseList(head);
+        int count=0;
+        head=start;
+        while(head)
+        {
+           count++;
+           head=head->next;
         }
         k=k%count;
-        while(k>0)
+        if(k==0)
+        return reverseList(start); 
+        ListNode* f=start;
+        while(k-1>0)
         {
-            ListNode* start=head;
-            r,p=head;
-            while(p->next!=nullptr)
-            {
-                r=p;
-                p=p->next;
-            }
-            head=p;
-            p->next=start;
-            r->next=nullptr;
+            start=start->next;
             k--;
         }
-        return p;
+         ListNode*  temp=start->next;
+        start->next=nullptr;
+         ListNode* p=f=reverseList(f);
+        while(f->next!=nullptr)
+            f=f->next;
+        temp=reverseList(temp);
+        f->next=temp;
+        return p; 
     }
 };
