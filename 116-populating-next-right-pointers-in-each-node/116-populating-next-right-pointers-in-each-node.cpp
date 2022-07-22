@@ -19,8 +19,10 @@ public:
 class Solution {
 public:
     Node* connect(Node* root) {
+        if(!root)
+            return root;
         Node* black=root;
-        while(black!=NULL&&black->left!=NULL)
+        while(black->left!=NULL)
         {
             Node *n=black;
   while(true)
