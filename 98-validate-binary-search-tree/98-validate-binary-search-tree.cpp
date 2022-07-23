@@ -11,24 +11,15 @@
  */
 class Solution {
 public:
-    void trav(TreeNode* root,vector<int>&v)
+    bool helper(TreeNode* root,long minval,long maxval)
     {
         if(!root)
-            return;
-        trav(root->left,v);
-        v.push_back(root->val);
-        trav(root->right,v);
+            return true;
+        if(root->val>=maxval||root->val<=minval)
+            return false;
+        return helper(root->left,minval,root->val)&&helper(root->right,root->val,maxval);
     }
     bool isValidBST(TreeNode* root) {
-        vector<int>v;
-        vector<int>temp;
-        trav(root,v);
-        int n=v.size();
-        for(int i=0;i<n-1;i++)
-        {
-            if(v[i+1]<=v[i]) return false;
-        }
-        
-        return true;
+        return helper(root,LONG_MIN,LONG_MAX);
     }
 };
