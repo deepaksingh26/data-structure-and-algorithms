@@ -21,7 +21,7 @@ public:
     }
     int kthSmallest(TreeNode* root, int k) {
         if(!root)
-            return 0;
+        return 0;
         vector<int>v;
         trav(root,v);
         return v[k-1];
