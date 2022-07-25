@@ -20,6 +20,6 @@ public:
            return searchBST(root->right,val);
         if(root->val>val)
           return  searchBST(root->left,val);
-        return root;
+       return nullptr;
     }
 };
